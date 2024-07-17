@@ -2,6 +2,7 @@ from concurrent import futures
 
 import grpc
 
+import order_pb2
 from grpc_client import get_user
 from database import get_db
 
