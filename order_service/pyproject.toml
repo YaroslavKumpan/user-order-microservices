@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "order_service"
+version = "0.1.0"
+description = "User service for managing orders"
+authors = ["Yaroslav Kumpan <yroslavkumpan@gmail.com>"]
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.11.5"
+grpcio = "^1.64.1"
+grpcio-tools = "^1.64.1"
+sqlalchemy = "^1.4.52"
+psycopg2-binary = "^2.9.9"
+protobuf = "^5.27.2"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+pytest = "^7.4.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
