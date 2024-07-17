@@ -1,0 +1,20 @@
+# Ignore everything
+**
+
+# Except these files
+!pyproject.toml
+!poetry.lock
+!app/
+!proto/
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
