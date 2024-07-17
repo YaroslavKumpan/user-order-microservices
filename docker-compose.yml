@@ -1,0 +1,48 @@
+services:
+  user_service:
+    build:
+      context: ./user_service
+      dockerfile: Dockerfile
+    env_file:
+      - ./user_service/.env
+    depends_on:
+      - postgres
+    ports:
+      - "50051:50051"
+    networks:
+      - microservices-network
+    environment:
+      - PYTHONPATH=/user_service/proto
+
+  order_service:
+    build:
+      context: ./order_service
+      dockerfile: Dockerfile
+    env_file:
+      - ./order_service/.env
+    depends_on:
+      - postgres
+      - user_service
+    ports:
+      - "50052:50052"
+    networks:
+      - microservices-network
+    environment:
+      - PYTHONPATH=/order_service/proto
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
