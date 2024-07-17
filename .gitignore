@@ -1,0 +1,32 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.db
+*.sqlite3
+*.env
+
+# Poetry
+.poetry/
+poetry.lock
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Docker
+*.dockerignore
+Dockerfile
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+*.log
+
+# PostgreSQL
+pgdata/
