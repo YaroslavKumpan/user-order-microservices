@@ -6,7 +6,6 @@ import user_pb2_grpc
 from models import User
 from database import SessionLocal
 
-
 class UserService(user_pb2_grpc.UserServiceServicer):
 
     def AddUser(self, request, context):

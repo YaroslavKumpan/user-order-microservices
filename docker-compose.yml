@@ -1,48 +1,43 @@
 services:
-  user_service:
-    build:
-      context: ./user_service
-      dockerfile: Dockerfile
-    env_file:
-      - ./user_service/.env
-    depends_on:
-      - postgres
-    ports:
-      - "50051:50051"
-    networks:
-      - microservices-network
-    environment:
-      - PYTHONPATH=/user_service/proto
-
   order_service:
     build:
       context: ./order_service
       dockerfile: Dockerfile
-    env_file:
-      - ./order_service/.env
+    container_name: order_service
+    volumes:
+      - ./order_service:/order_service
+    ports:
+      - "50051:50051"  # Пример порта, измените по необходимости
+    environment:
+      - ENV_VAR=example_value  # Добавьте необходимые переменные окружения
     depends_on:
       - postgres
-      - user_service
+
+  user_service:
+    build:
+      context: ./user_service
+      dockerfile: Dockerfile
+    container_name: user_service
+    volumes:
+      - ./user_service:/user_service
     ports:
-      - "50052:50052"
-    networks:
-      - microservices-network
+      - "50052:50052"  # Пример порта, измените по необходимости
     environment:
-      - PYTHONPATH=/order_service/proto
+      - ENV_VAR=example_value  # Добавьте необходимые переменные окружения
+    depends_on:
+      - postgres
 
   postgres:
     image: postgres:latest
+    container_name: postgres-1
     environment:
-      POSTGRES_USER: user
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - microservices-network
-
-networks:
-  microservices-network:
-    driver: bridge
 
 volumes:
   postgres_data:
