@@ -24,7 +24,11 @@ RUN poetry install --no-dev
 COPY . .
 
 # Генерируем Python-код из proto-файлов
-RUN python -m grpc_tools.protoc --python_out=. --grpc_python_out=. --pyi_out=. --proto_path=. ./proto/*.proto
+RUN mkdir -p generated && \
+    python -m grpc_tools.protoc --python_out=generated --grpc_python_out=generated --pyi_out=generated --proto_path=./proto ./proto/*.proto
+
+# Устанавливаем PYTHONPATH, чтобы найти сгенерированные файлы
+ENV PYTHONPATH="${PYTHONPATH}:/order_service/generated"
 
 # Указываем команду для выполнения при запуске контейнера
 CMD ["poetry", "run", "python", "app/grpc_server.py"]
