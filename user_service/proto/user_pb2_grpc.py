@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from proto import user_pb2 as proto_dot_user__pb2
+import user_pb2 as proto_dot_user__pb2
 
 GRPC_GENERATED_VERSION = '1.64.1'
 GRPC_VERSION = grpc.__version__

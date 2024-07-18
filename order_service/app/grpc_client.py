@@ -3,7 +3,7 @@ import os
 import grpc
 from dotenv import load_dotenv
 
-from user_service.proto import user_pb2_grpc, user_pb2
+import user_pb2_grpc, user_pb2
 
 load_dotenv()
 

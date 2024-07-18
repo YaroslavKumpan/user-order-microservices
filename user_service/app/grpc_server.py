@@ -1,9 +1,11 @@
 from concurrent import futures
 import grpc
 
+import user_pb2
+import user_pb2_grpc
 from models import User
 from database import SessionLocal
-from user_service.proto import user_pb2_grpc, user_pb2
+
 
 class UserService(user_pb2_grpc.UserServiceServicer):
 
